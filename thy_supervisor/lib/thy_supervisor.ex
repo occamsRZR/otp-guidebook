@@ -88,12 +88,12 @@ defmodule ThySupervisor do
     {:reply, state, state}
   end
 
-  def handle_info({:EXIT, from, :killed}, state) do
+  def handle_info({:EXIT, from, :normal}, state) do
     new_state = state |> HashDict.delete(from)
     {:noreply, new_state}
   end
-
-  def handle_info({:EXIT, from, :normal}, state) do
+  
+  def handle_info({:EXIT, from, :killed}, state) do
     new_state = state |> HashDict.delete(from)
     {:noreply, new_state}
   end
